@@ -6,7 +6,7 @@ export function cleanInput(input: string): string[] {
 
 export function startREPL(state: State) {
   state.readline.prompt();
-  state.readline.on("line", (line) => {
+  state.readline.on("line", async (line) => {
     const args = cleanInput(line);
     if (!args) {
       state.readline.prompt();
@@ -15,8 +15,13 @@ export function startREPL(state: State) {
     if (command === undefined) {
       console.log("Unknown command");
       state.readline.prompt();
+      return;
     }
-    command.callback(state);
+    try {
+      await command.callback(state);
+    } catch (e) {
+      console.error((e as Error).message);
+    }
     state.readline.prompt();
   });
 }

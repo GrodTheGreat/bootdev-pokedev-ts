@@ -1,8 +1,11 @@
 import { createInterface, type Interface } from "node:readline";
-import { commandHelp } from "./command_help.js";
-import { commandExit } from "./command_exit.js";
+import { PokeAPI } from "./pokeapi.js";
+import { getCommands } from "./commands.js";
 
 export type State = {
+  pokeapi: PokeAPI;
+  nextLocationsURL: string;
+  prevLocationsURL: string;
   readline: Interface;
   commands: Record<string, CLICommand>;
 };
@@ -10,7 +13,7 @@ export type State = {
 export type CLICommand = {
   name: string;
   description: string;
-  callback: (state: State) => void;
+  callback: (state: State) => Promise<void>;
 };
 
 export function initState(): State {
@@ -20,20 +23,11 @@ export function initState(): State {
     prompt: "Pokedex > ",
   });
   const commands = getCommands();
-  return { readline: rl, commands };
-}
-
-export function getCommands(): Record<string, CLICommand> {
   return {
-    help: {
-      name: "help",
-      description: "Displays a help message",
-      callback: commandHelp,
-    },
-    exit: {
-      name: "exit",
-      description: "Exits the pokedex",
-      callback: commandExit,
-    },
+    pokeapi: new PokeAPI(),
+    nextLocationsURL: "",
+    prevLocationsURL: "",
+    readline: rl,
+    commands,
   };
 }
