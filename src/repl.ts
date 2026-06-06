@@ -11,14 +11,15 @@ export function startREPL(state: State) {
     if (!args) {
       state.readline.prompt();
     }
-    const command = state.commands[args[0]];
+    const [cmd, ...rest] = args;
+    const command = state.commands[cmd];
     if (command === undefined) {
       console.log("Unknown command");
       state.readline.prompt();
       return;
     }
     try {
-      await command.callback(state);
+      await command.callback(state, ...rest);
     } catch (e) {
       console.error((e as Error).message);
     }
