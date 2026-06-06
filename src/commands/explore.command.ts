@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../pokeapi/state.js";
 
 export async function commandExplore(state: State, ...args: string[]) {
   const locationArg = args[0] || "";

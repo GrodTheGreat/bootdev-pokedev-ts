@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../pokeapi/state.js";
 
 export async function commandCatch(state: State, ...args: string[]) {
   const pokemon = args[0] || "";

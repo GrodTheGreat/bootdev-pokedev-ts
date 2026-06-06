@@ -1,11 +1,11 @@
-import { commandCatch } from "./command_catch.js";
-import { commandExit } from "./command_exit.js";
-import { commandExplore } from "./command_explore.js";
-import { commandHelp } from "./command_help.js";
-import { commandInspect } from "./command_inspect.js";
-import { commandMap, commandMapb } from "./command_map.js";
-import { commandPokedex } from "./command_pokedex.js";
-import { CLICommand } from "./state.js";
+import { commandCatch } from "./catch.command.js";
+import { commandExit } from "./exit.command.js";
+import { commandExplore } from "./explore.command.js";
+import { commandHelp } from "./help.command.js";
+import { commandInspect } from "./inspect.command.js";
+import { commandMap, commandMapb } from "./map.command.js";
+import { commandPokedex } from "./pokedex.command.js";
+import { CLICommand } from "../pokeapi/state.js";
 
 export function getCommands(): Record<string, CLICommand> {
   return {

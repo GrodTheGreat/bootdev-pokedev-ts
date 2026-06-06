@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../pokeapi/state.js";
 
 export async function commandMap(state: State) {
   const locations = await state.pokeapi.fetchLocations(state.nextLocationsURL);

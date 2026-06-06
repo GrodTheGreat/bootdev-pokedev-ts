@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "./pokeapi/state.js";
 
 export function cleanInput(input: string): string[] {
   return input.trim().toLowerCase().split(" ");
